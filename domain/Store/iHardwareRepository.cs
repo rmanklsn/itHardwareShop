@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Store
 {
-    internal interface iHardwareRepo
+    public interface iHardwareRepository
     {
-        Hardware[] GetAllByTitle (string titlepart);
+        Hardware[] GetAllByTitle(string titlePart);
     }
+      
 }

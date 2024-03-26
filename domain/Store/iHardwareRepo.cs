@@ -8,5 +8,6 @@ namespace Store
 {
     internal interface iHardwareRepo
     {
+        Hardware[] GetAllByTitle (string titlepart);
     }
 }

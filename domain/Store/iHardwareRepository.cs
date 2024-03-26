@@ -10,4 +10,5 @@ namespace Store
     {
         Hardware[] GetAllByTitle(string titlePart);
     }
+      
 }

@@ -1,17 +1,17 @@
-﻿using System;
+﻿
+using System;
 
 namespace Store
 {
     public class Hardware
     {
+        public int Id { get; }
         public string Title { get; }
 
-        public int Id { get;  } 
-
-        public Hardware (int id, string title)
+        public Hardware(int id, string title)
         {
-            Title = title;
             Id = id;
+            Title = title;
         }
     }
 }

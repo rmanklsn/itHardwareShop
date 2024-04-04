@@ -20,7 +20,7 @@ namespace Store.Web.Controllers
         {
             var itHardWare = itHardwareRepository.GetAllByTitle(query);
 
-            return View(itHardWare);
+            return View("Index", itHardWare);
         }
     }
 }

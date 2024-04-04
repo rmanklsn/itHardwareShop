@@ -9,6 +9,10 @@ namespace Store
     public interface iHardwareRepository
     {
         Hardware[] GetAllByTitle(string titlePart);
+
+        Hardware[] GetAllByDescription(string descriptionPart);
+
+        Hardware GetById(int id);
     }
       
 }

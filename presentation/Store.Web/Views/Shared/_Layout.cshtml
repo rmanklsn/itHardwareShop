@@ -16,6 +16,20 @@
                 <input class="form-control mr-sm-2" type="search" name="query" placeholder="title or description"/>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Let`s find something</button>
             </form>
+            <span class="navbar-text modal-lg auto">
+                @{
+                    Cart cart = new Cart();
+
+                    if (cart.Items.Count == 0)
+                    {
+                        @:Cart is empty so far...
+                    }
+                    else
+                    {
+                        @:Hardware pieces in cart @cart.Items.Count for amount @cart.Amount
+                    }
+                }
+            </span>
         </nav>
     </header>
     <div class="container">
@@ -23,6 +37,7 @@
             @RenderBody()
         </main>
     </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

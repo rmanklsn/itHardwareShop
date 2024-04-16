@@ -7,3 +7,8 @@
 <h1>@Model.Title</h1>
 <p><strong>@Model.Description</strong></p>
 <p>Price <strong>@Model.Price</strong></p>
+<from action="@Url.Action("Add", "Cart")" method="post">
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <button class="btn btn-outline-success" type="submit"> to Cart </button>
+
+</from>

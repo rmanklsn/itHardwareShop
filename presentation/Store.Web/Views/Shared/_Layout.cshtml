@@ -18,7 +18,9 @@
             </form>
             <span class="navbar-text modal-lg auto">
                 @{
-                    Cart cart = new Cart();
+                    Cart cart;
+                    if (!Context.Session.TryGetCart(out cart))
+                        cart = new Cart();
 
                     if (cart.Items.Count == 0)
                     {

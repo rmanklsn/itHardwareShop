@@ -8,12 +8,14 @@ namespace Store.Web
     public static class SessionExtensions
     {
         private const string key = "Cart";
+
         public static void Set(this ISession session, Cart value)
         {
             if (value == null)
                 return;
+
             using (var stream = new MemoryStream())
-            using (var writer = new StreamWriter(stream, Encoding.UTF8, true))
+            using (var writer = new BinaryWriter(stream, Encoding.UTF8, leaveOpen: false))
             {
                 writer.Write(value.Items.Count);
                 foreach (var item in value.Items)
@@ -24,6 +26,7 @@ namespace Store.Web
 
                 writer.Write(value.Amount);
 
+                writer.Flush();  // Ensure all data is written to the stream
                 session.Set(key, stream.ToArray());
             }
         }
@@ -33,25 +36,26 @@ namespace Store.Web
             if (session.TryGetValue(key, out byte[] buffer))
             {
                 using (var stream = new MemoryStream(buffer))
-                using (var reader = new BinaryReader(stream, Encoding.UTF8, true))
+                using (var reader = new BinaryReader(stream, Encoding.UTF8, leaveOpen: false))
                 {
+                    int length = reader.ReadInt32();
                     value = new Cart();
 
-                    var lenght = reader.ReadInt32();
-                    for (int i = 0; i < lenght; i++)
+                    for (int i = 0; i < length; i++)
                     {
-                        var hardwareId = reader.ReadInt32();
-                        var count = reader.ReadInt32();
-
+                        int hardwareId = reader.ReadInt32();
+                        int count = reader.ReadInt32();
                         value.Items.Add(hardwareId, count);
                     }
-                    value.Amount = reader.ReadUInt32();
+
+                    value.Amount = reader.ReadInt32();
 
                     return true;
                 }
             }
 
-            value = null; return false;
+            value = null;
+            return false;
         }
     }
 }

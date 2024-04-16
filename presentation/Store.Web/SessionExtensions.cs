@@ -15,7 +15,7 @@ namespace Store.Web
                 return;
 
             using (var stream = new MemoryStream())
-            using (var writer = new BinaryWriter(stream, Encoding.UTF8, leaveOpen: false))
+            using (var writer = new BinaryWriter(stream, Encoding.UTF8, true))
             {
                 writer.Write(value.Items.Count);
                 foreach (var item in value.Items)
@@ -26,7 +26,7 @@ namespace Store.Web
 
                 writer.Write(value.Amount);
 
-                writer.Flush();  // Ensure all data is written to the stream
+                
                 session.Set(key, stream.ToArray());
             }
         }
@@ -36,19 +36,21 @@ namespace Store.Web
             if (session.TryGetValue(key, out byte[] buffer))
             {
                 using (var stream = new MemoryStream(buffer))
-                using (var reader = new BinaryReader(stream, Encoding.UTF8, leaveOpen: false))
+                using (var reader = new BinaryReader(stream, Encoding.UTF8, true))
                 {
-                    int length = reader.ReadInt32();
+                    
                     value = new Cart();
+                    var length = reader.ReadInt32();
 
                     for (int i = 0; i < length; i++)
                     {
                         int hardwareId = reader.ReadInt32();
                         int count = reader.ReadInt32();
+
                         value.Items.Add(hardwareId, count);
                     }
 
-                    value.Amount = reader.ReadInt32();
+                    value.Amount = reader.ReadDecimal();
 
                     return true;
                 }

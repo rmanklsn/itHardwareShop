@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] -   it hardware store written on C# as a learning project</title>
+    <title>@ViewData["Title"] -   it hardware store written on C# as a learning project </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Store.Web.styles.css" asp-append-version="true" />
@@ -13,18 +13,19 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-white">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">  it hardware store written on C# as a learning project</a>
             <form class="form-check-inline my-2 my-lg-0" action="@Url.Action("Index", "Search")" method="get">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="title or description"/>
+                <input class="form-control mr-sm-2" type="search" name="query" placeholder="title or description" />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Let`s find something</button>
             </form>
-            <span class="navbar-text modal-lg auto">
+            <span class="navbar-text ml-auto">
                 @{
                     Cart cart;
+
                     if (!Context.Session.TryGetCart(out cart))
                         cart = new Cart();
 
                     if (cart.Items.Count == 0)
                     {
-                        @:Cart is empty so far...
+                        @:  Cart is empty so far...
                     }
                     else
                     {

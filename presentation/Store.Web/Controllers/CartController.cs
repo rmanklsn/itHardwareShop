@@ -15,24 +15,31 @@ namespace Store.Web.Controllers
         public IActionResult Add(int id)
         {
             var hardware = hardwareRepository.GetById(id);
+            if (hardware == null)
+            {
+                return NotFound();
+            }
+
             Cart cart;
             if (!HttpContext.Session.TryGetCart(out cart))
+            {
                 cart = new Cart();
+            }
 
             if (cart.Items.ContainsKey(id))
             {
                 cart.Items[id]++;
-                cart.Amount += hardware.Price;
             }
             else
             {
                 cart.Items[id] = 1;
-                cart.Amount += hardware.Price;
             }
 
-            HttpContext.Session.Set(cart);
+            cart.Amount += hardware.Price;
 
-            return RedirectToAction("Index", "Book", new { id = id });
+            HttpContext.Session.Set(cart);  
+
+            return RedirectToAction("Index", "Hardware", new { id });
         }
     }
 }

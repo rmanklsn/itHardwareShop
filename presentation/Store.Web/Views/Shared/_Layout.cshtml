@@ -18,19 +18,19 @@
             </form>
             <span class="navbar-text ml-auto">
                 @{
-                    Cart cart;
 
-                    if (!Context.Session.TryGetCart(out cart))
-                        cart = new Cart();
 
-                    if (cart.Items.Count == 0)
+                    if (Context.Session.TryGetCart(out Cart cart) && cart.TotalCount > 0)
+                    {
+                        <a href="">Hardware pieces in cart @cart.TotalCount for amount @cart.TotalPrice</a>
+                    }
+
+
+                    else
                     {
                         @:  Cart is empty so far...
                     }
-                    else
-                    {
-                        @:Hardware pieces in cart @cart.Items.Count for amount @cart.Amount
-                    }
+                    
                 }
             </span>
         </nav>

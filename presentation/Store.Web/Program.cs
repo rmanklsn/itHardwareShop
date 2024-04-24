@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<iHardwareRepository, HardWareTitlesRepository>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -14,6 +13,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddSingleton<iHardwareRepository, HardWareTitlesRepository>();
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+builder.Services.AddSingleton<HardwareService>();
 
 var app = builder.Build();
 

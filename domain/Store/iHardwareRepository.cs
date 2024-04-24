@@ -10,6 +10,8 @@ namespace Store
     {
         Hardware[] GetAllByTitle(string titlePart);
 
+        Hardware[] GetAllByID_N(string id_nPart);
+
         Hardware[] GetAllByDescription(string descriptionPart);
 
         Hardware GetById(int id);

@@ -15,8 +15,8 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddSingleton<iHardwareRepository, HardWareTitlesRepository>();
-builder.Services.AddSingleton<IOrderRepository, OrderRepository();
-builder.Services.AddSingleton<>
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+builder.Services.AddSingleton<HardwareService>();
 
 var app = builder.Build();
 

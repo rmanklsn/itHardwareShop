@@ -9,18 +9,18 @@ namespace Store.Web.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly iHardwareRepository itHardwareRepository;
+        private readonly HardwareService hardwareService;
 
-        public SearchController(iHardwareRepository itHardwareRepository)
+        public SearchController(HardwareService hardwareService)
         {
-            this.itHardwareRepository = itHardwareRepository;
+            this.hardwareService = hardwareService;
         }
 
         public IActionResult Index(string query)
         {
-            var itHardWare = itHardwareRepository.GetAllByTitle(query);
+            var itHardWare = hardwareService.GetAllByQuery(query);
 
-            return View("Index", itHardWare);
+            return View(itHardWare);
         }
     }
 }

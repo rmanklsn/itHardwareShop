@@ -17,7 +17,7 @@ namespace Store
         public OrderItem(int hardwareId, int count, decimal price) 
         {
             if (count <= 0)
-                throw new ArgumentOutOfRangeException("count must be greater");
+                throw new ArgumentOutOfRangeException("Count must be greater then zero");
             
             
             HardwareId = hardwareId; 
